@@ -1,5 +1,5 @@
 import { SessionGuard } from './session.guard';
-import { AuthService } from '../../service/auth.service';
+import { AuthService } from '../../auth/service/auth.service';
 
 describe('SessionGuard', () => {
   it('should be defined', () => {
