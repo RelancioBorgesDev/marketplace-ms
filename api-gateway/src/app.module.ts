@@ -7,6 +7,12 @@ import { ProxyModule } from './proxy/proxy.module';
 import { MiddlewareModule } from './middleware/middleware.module';
 import { LoggingMiddleware } from './middleware/logging/logging.middleware';
 import { AuthModule } from './auth/auth.module';
+import { HealthService } from './health/health.service';
+import { HealthController } from './health/health.controller';
+import { HealthModule } from './health/health.module';
+import { HealthCheckModule } from './common/health-check/health-check.module';
+import { FallbackModule } from './common/fallback/fallback.module';
+import { CircuitBreakerModule } from './common/circuit-breaker/circuit-breaker.module';
 
 @Module({
   imports: [
@@ -37,9 +43,13 @@ import { AuthModule } from './auth/auth.module';
     ProxyModule,
     MiddlewareModule,
     AuthModule,
+    HealthModule,
+    HealthCheckModule,
+    FallbackModule,
+    CircuitBreakerModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, HealthController],
+  providers: [AppService, HealthService],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
